@@ -21,6 +21,43 @@ php composer.phar require constup/php-text-processing
 
 [Table of contents](./doc/Fearures_and_documentation.md)
 
+## Usage
+
+All classes in this package are built as **services** which can be **autowired**.
+
+You can read more about autowiring here:
+
+- Laravel: [Automatic Resolution](https://laravel.com/docs/4.2/ioc#automatic-resolution).
+- Symfony: [Autowing](https://symfony.com/doc/current/service_container/autowiring.html) 
+
+#### Example
+
+```php
+use Constup\PhpTextProcessing\General\DelimiterProcessorInterface;
+
+class YourClass
+{
+    private \Constup\PhpTextProcessing\General\DelimiterProcessorInterface $delimiterProcessor;
+    
+    public function __construct(DelimiterProcessorInterface $delimiterProcessor)
+    {
+        $this->delimiterProcessor = $delimiterProcessor;
+    }
+    
+    public function getDelimiterProcessor(): DelimiterProcessorInterface
+    {
+        return $this->delimiterProcessor;
+    }
+
+    public function yourMethod(string $something): string
+    {
+        $processedText = $this->getDelimiterProcessor()
+            ->replaceTextBetweenDelimiters($something, 'start', 'end', 'replacement text');
+        ...
+    }   
+}
+```
+
 ## License
 
 [MIT License](./LICENSE)
