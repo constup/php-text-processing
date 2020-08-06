@@ -17,6 +17,15 @@ Think you can do something better? Submit a pull request and contribute.
 php composer.phar require constup/php-text-processing
 ```
 
+### Additional steps for Symfony integration
+
+In order to enable **autowiring** in Symfony, add the following to your service container (`config/services.yaml`):
+
+```yaml
+    Constup\PhpTextProcessing\:
+        resource : '../vendor/constup/php-text-processing/src'
+```
+
 ## Features and Documentation
 
 [Table of contents](./doc/Fearures_and_documentation.md)
