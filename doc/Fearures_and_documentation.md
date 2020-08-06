@@ -1,3 +1,3 @@
 # Features and documentation
 
-- [Delimiter processor](./General/DelimiterProcessor.md)
+- [Delimiter processor (`DelimiterProcessorInterface`)](./General/DelimiterProcessor.md)

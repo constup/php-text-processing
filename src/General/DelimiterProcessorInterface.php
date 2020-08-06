@@ -11,6 +11,8 @@ namespace Constup\PhpTextProcessing\General;
  */
 interface DelimiterProcessorInterface
 {
+    const CONTENT_WILDCARD = '(.*?)';
+
     /**
      * @param string   $source
      * @param string   $startDelimiter
@@ -31,4 +33,34 @@ interface DelimiterProcessorInterface
         int $limit = -1,
         ?int &$count = null
     ): string;
+
+    /**
+     * @param string $source
+     * @param string $startDelimiter
+     * @param string $endDelimiter
+     * @param bool   $includeDelimitersInResult
+     *
+     * @return array
+     */
+    public function extractTextBetweenDelimiters(
+        string $source,
+        string $startDelimiter,
+        string $endDelimiter,
+        bool $includeDelimitersInResult = true
+    ): array;
+
+    /**
+     * @param string   $source
+     * @param string[] $pattern
+     * @param int      $flags
+     * @param int      $offset
+     *
+     * @return array
+     */
+    public function matchPattern(
+        string $source,
+        array $pattern,
+        $flags = PREG_PATTERN_ORDER,
+        $offset = 0
+    ): array;
 }
