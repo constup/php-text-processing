@@ -37,7 +37,7 @@ use Constup\PhpTextProcessing\General\DelimiterProcessorInterface;
 
 class YourClass
 {
-    private \Constup\PhpTextProcessing\General\DelimiterProcessorInterface $delimiterProcessor;
+    private DelimiterProcessorInterface $delimiterProcessor;
     
     public function __construct(DelimiterProcessorInterface $delimiterProcessor)
     {
