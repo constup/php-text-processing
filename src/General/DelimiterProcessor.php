@@ -4,6 +4,9 @@ declare(strict_types = 1);
 
 namespace Constup\PhpTextProcessing\General;
 
+use Constup\PhpTextProcessing\CommonRegexElementsInterface;
+use Constup\PhpTextProcessing\RegexGenerator\General\GeneralRegexGeneratorInterface;
+
 /**
  * Class DelimiterProcessor
  *
@@ -11,6 +14,27 @@ namespace Constup\PhpTextProcessing\General;
  */
 class DelimiterProcessor implements DelimiterProcessorInterface
 {
+    /** @var GeneralRegexGeneratorInterface */
+    private $generalRegexGenerator;
+
+    /**
+     * DelimiterProcessor constructor.
+     *
+     * @param GeneralRegexGeneratorInterface $generalRegexGenerator
+     */
+    public function __construct(GeneralRegexGeneratorInterface $generalRegexGenerator)
+    {
+        $this->generalRegexGenerator = $generalRegexGenerator;
+    }
+
+    /**
+     * @return GeneralRegexGeneratorInterface
+     */
+    public function getGeneralRegexGenerator(): GeneralRegexGeneratorInterface
+    {
+        return $this->generalRegexGenerator;
+    }
+
     /**
      * @param string   $source
      * @param string   $startDelimiter
@@ -35,7 +59,9 @@ class DelimiterProcessor implements DelimiterProcessorInterface
             $replacementText = '$1' . $replacementText . '$3';
         }
 
-        return preg_replace('#(' . preg_quote($startDelimiter) . ')(.*?)(' . preg_quote($endDelimiter) . ')#s', $replacementText, $source, $limit, $count);
+        $regex = $this->getGeneralRegexGenerator()->generateReplaceTextBetweenDelimiters($startDelimiter, $endDelimiter);
+
+        return preg_replace($regex, $replacementText, $source, $limit, $count);
     }
 
     /**
@@ -44,7 +70,7 @@ class DelimiterProcessor implements DelimiterProcessorInterface
      * @param string $endDelimiter
      * @param bool   $includeDelimitersInResult
      *
-     * @return array
+     * @return string[]
      */
     public function extractTextBetweenDelimiters(
         string $source,
@@ -52,7 +78,7 @@ class DelimiterProcessor implements DelimiterProcessorInterface
         string $endDelimiter,
         bool $includeDelimitersInResult = true
     ): array {
-        $pattern = [$startDelimiter, self::CONTENT_WILDCARD, $endDelimiter];
+        $pattern = [$startDelimiter, CommonRegexElementsInterface::CONTENT_WILDCARD, $endDelimiter];
         $result = $this->matchPattern($source, $pattern);
 
         return ($includeDelimitersInResult === true)
@@ -61,26 +87,40 @@ class DelimiterProcessor implements DelimiterProcessorInterface
     }
 
     /**
-     * @param string   $source
-     * @param string[] $pattern
-     * @param int      $flags
-     * @param int      $offset
+     * @param string  $source
+     * @param array[] $pattern Format: ['isRegex' => bool, 'value' => string]
+     * @param int     $flags
+     * @param int     $offset
      *
      * @return array
      */
-    public function matchPattern(string $source, array $pattern, $flags = PREG_PATTERN_ORDER, $offset = 0): array
-    {
-        $regex = '#';
-        foreach ($pattern as $keyword) {
-            if ($keyword !== self::CONTENT_WILDCARD) {
-                $regex .= '(' . preg_quote($keyword) . ')';
-            } else {
-                $regex .= self::CONTENT_WILDCARD;
-            }
-        }
-        $regex .= '#s';
+    public function matchPattern(
+        string $source,
+        array $pattern,
+        $flags = PREG_PATTERN_ORDER,
+        $offset = 0
+    ): array {
+        $regex = $this->getGeneralRegexGenerator()->generateMatchPattern($pattern);
         preg_match_all($regex, $source, $matches, $flags, $offset);
 
         return $matches;
+    }
+
+    /**
+     * @param string  $source
+     * @param array[] $pattern  Format: ['isRegex' => bool, 'value' => string]
+     * @param array[] $prefixes Format: ['isRegex' => bool, 'value' => string]
+     *
+     * @return array
+     */
+    public function matchPatternWithPrefixes(
+        string $source,
+        array $pattern,
+        array $prefixes
+    ): array {
+        $regex = $this->getGeneralRegexGenerator()->generateMatchPatternWithPrefixes($pattern, $prefixes);
+        preg_match_all($regex, $source, $matches);
+
+        return $matches[0];
     }
 }

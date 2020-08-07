@@ -30,3 +30,4 @@ Array of all matches.
 - [Home](../../Fearures_and_documentation.md)
 - [Parent: DelimiterProcessor (`DelimiterProcessorInterface`)](../DelimiterProcessor.md)
 - [Related method: `matchPattern()`](./matchPattern.md)
+- [Common regular expression elements (`CommonRegexElementsInterface`)](../../CommonRegexElementsInterface.md)
