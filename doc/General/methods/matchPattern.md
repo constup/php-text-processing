@@ -6,10 +6,6 @@ Runs through `source` and searches for all substrings which match the `pattern`.
 
 This method is used as a base for other string extracting methods. You can either use this method directly or its more specialized versions.
 
-### Related methods
-
-- [`extractTextBetweenDelimiters()`](./extractTextBetweenDelimiters.md) - Extracts text betwen defined start and end delimiters.
-
 ## Parameters
 
 - `string $source`
@@ -32,6 +28,16 @@ This method is used as a base for other string extracting methods. You can eithe
 
 Array of all matches in multi-dimensional array ordered according to `flags`, as described at 
 [`preg_match_all()`](https://www.php.net/manual/en/function.preg-match-all.php).
+
+## Related methods
+
+### Related processor methods
+
+- [`extractTextBetweenDelimiters()`](./extractTextBetweenDelimiters.md) - Extracts text betwen defined start and end delimiters.
+
+### Related generator methods
+
+- [`generateMatchPattern()`](../../RegexGenerator/methods/generateMatchPattern.md) - Generates a regular expression used in this (`matchPattern()`) method.
 
 ## Examples
 

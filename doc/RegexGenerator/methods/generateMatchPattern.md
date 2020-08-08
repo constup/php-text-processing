@@ -2,9 +2,7 @@
 
 ## Description
 
-Runs through `source` and searches for all substrings which match the `pattern`.
-
-This method is used as a base for other string extracting methods. You can either use this method directly or its more specialized versions.
+Generates a regular expression used for matching patterns of various lengths.
 
 ## Parameters
 
@@ -14,7 +12,7 @@ This method is used as a base for other string extracting methods. You can eithe
     - `value`: a string representing the part of the pattern to search for.
   - `CommonRegexGeneratorInterface` has several constants defined to be used as a quick shortcut for using the most common regular expression search patterns. The names of these constants start with `CONTENT_`. The format of adata inside these constants is compatible with the format of data `pattern` parameter can use. For example, to pass a wildcard: `(.*?)`, use `CommonRegexGeneratorInterface::CONTENT_WILDCARD`.
 - `string $regexOptions`
-  - default value: `'s'`
+  - default value: `'s'` (`PCRE_DOTALL`)
   - PRCE pattern modifiers. Official documentation is available here: [https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php](https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php)
 
 ## Returns
@@ -42,12 +40,14 @@ $pattern = [
     CommonRegexGeneratorInterface::CONTENT_WILDCARD,
     ['isRegex' => false, 'value' => 'lazy']
 ];
+$result = (new GeneralRegexGenerator())->generateMatchPattern($source, $pattern);
+print_r($matches);
 ```
 
 Result:
 
 ```
-
+#(brown)(.*?)(over)(.*?)(lazy)#s
 ```
 
 ---
@@ -55,5 +55,5 @@ Result:
 ## Links
 
 - [Home](../../Fearures_and_documentation.md)
-- [Parent: DelimiterProcessor (`DelimiterProcessorInterface`)](../DelimiterProcessor.md)
+- [Parent: General regular expression generator (`GeneralRegexGeneratorInterface()`)](../GeneralRegexGenerator.md)
 - [Common regular expression elements (`CommonRegexElementsInterface`)](../../CommonRegexElementsInterface.md)
