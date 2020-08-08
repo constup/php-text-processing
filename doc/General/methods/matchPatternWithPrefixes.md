@@ -2,7 +2,7 @@
 
 ## Description
 
-Runs through `source` and searches for all substrings which match the `pattern` and has one or more optional `prefixes`.
+Runs through `source` and searches for all substrings which match the `pattern` and has none, one or more optional `prefixes`.
 
 ## Parameters
 

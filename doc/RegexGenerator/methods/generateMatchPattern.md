@@ -13,7 +13,7 @@ Generates a regular expression used for matching patterns of various lengths.
   - `CommonRegexGeneratorInterface` has several constants defined to be used as a quick shortcut for using the most common regular expression search patterns. The names of these constants start with `CONTENT_`. The format of adata inside these constants is compatible with the format of data `pattern` parameter can use. For example, to pass a wildcard: `(.*?)`, use `CommonRegexGeneratorInterface::CONTENT_WILDCARD`.
 - `string $regexOptions`
   - default value: `'s'` (`PCRE_DOTALL`)
-  - PRCE pattern modifiers. Official documentation is available here: [https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php](https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php)
+  - PCRE pattern modifiers. Official documentation is available here: [https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php](https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php)
 
 ## Returns
 

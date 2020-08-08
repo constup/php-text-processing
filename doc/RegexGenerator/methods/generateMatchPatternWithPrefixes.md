@@ -16,7 +16,7 @@ Generates a regular expression used for matching patterns of various lengths. Th
   - The format of the `prefixes` array is the same as for `pattern` (`isRegex` and `value` fields)
 - `string $regexOptions`
   - default value: `'s'` (`PCRE_DOTALL`)
-  - PRCE pattern modifiers. Official documentation is available here: [https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php](https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php)
+  - PCRE pattern modifiers. Official documentation is available here: [https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php](https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php)
 
 This method uses `PREG_PATTERN_ORDER` and `0` as `offset` when using [`preg_match_all()`](https://www.php.net/manual/en/function.preg-match-all.php) to generate the result.
 

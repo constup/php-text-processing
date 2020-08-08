@@ -37,7 +37,7 @@ All classes in this package are built as **services** which can be **autowired**
 You can read more about autowiring here:
 
 - Laravel: [Automatic Resolution](https://laravel.com/docs/4.2/ioc#automatic-resolution).
-- Symfony: [Autowing](https://symfony.com/doc/current/service_container/autowiring.html) 
+- Symfony: [Autowiring](https://symfony.com/doc/current/service_container/autowiring.html) 
 
 #### Example using dependency injection and autowiring
 
@@ -79,8 +79,8 @@ class YourClass
     {
         $processedText = (new DelimiterProcessor())
             ->replaceTextBetweenDelimiters($something, 'start', 'end', 'replacement text');
+        ...
     }
-    ...
 }
 
 ```

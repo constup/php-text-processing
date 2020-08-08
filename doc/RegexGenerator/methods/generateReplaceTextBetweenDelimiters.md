@@ -4,10 +4,6 @@
 
 Generates a regular expression used for replacing text within start and end delimiters.
 
-
-Since `replaceTextBetweenDelimiters` uses [`preg_replace()`](https://www.php.net/manual/en/function.preg-replace), parameters
-`$limit` and `$count` are inherited from [`preg_replace()`](https://www.php.net/manual/en/function.preg-replace).
-
 ## Parameters
 
 - `string $startDelimiter`
@@ -16,7 +12,7 @@ Since `replaceTextBetweenDelimiters` uses [`preg_replace()`](https://www.php.net
   - End delimiter.
 - `string $regexOptions`
   - default value: `'s'` (`PCRE_DOTALL`)
-  - PRCE pattern modifiers. Official documentation is available here: [https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php](https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php)
+  - PCRE pattern modifiers. Official documentation is available here: [https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php](https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php)
 
 ## Returns
 
