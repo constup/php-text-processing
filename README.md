@@ -39,7 +39,7 @@ You can read more about autowiring here:
 - Laravel: [Automatic Resolution](https://laravel.com/docs/4.2/ioc#automatic-resolution).
 - Symfony: [Autowing](https://symfony.com/doc/current/service_container/autowiring.html) 
 
-#### Example
+#### Example using dependency injection and autowiring
 
 ```php
 use Constup\PhpTextProcessing\General\DelimiterProcessorInterface;
@@ -65,6 +65,24 @@ class YourClass
         ...
     }   
 }
+```
+
+#### Example using a class directly
+
+```php
+
+use Constup\PhpTextProcessing\General\DelimiterProcessor;
+
+class YourClass
+{
+    public function yourMethod(string $something): string
+    {
+        $processedText = (new DelimiterProcessor())
+            ->replaceTextBetweenDelimiters($something, 'start', 'end', 'replacement text');
+    }
+    ...
+}
+
 ```
 
 ## License
